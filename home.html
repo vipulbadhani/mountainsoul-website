@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mountain Soul Foundation — Modern Mind, Ancient Roots</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #1a1a14;
+  --forest: #2a4a1f;
+  --moss:   #4a7a35;
+  --ochre:  #c8541a;
+  --gold:   #d4a017;
+  --cream:  #f7f2ea;
+  --warm:   #ede5d4;
+  --muted:  #7a7060;
+  --border: rgba(26,26,20,0.12);
+  --white:  #ffffff;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Source Sans 3', sans-serif; background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.65; overflow-x: hidden; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--ochre); border-radius: 2px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem 5vw; background: rgba(247,242,234,0.93); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); transition: box-shadow 0.3s; }
+nav.scrolled { box-shadow: 0 2px 24px rgba(26,26,20,0.08); }
+.nav-logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+.nav-logo img { height: 44px; width: 44px; object-fit: contain; border-radius: 50%; }
+.nav-logo-text { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.nav-logo-text span { color: var(--ochre); }
+.nav-logo-sub { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.nav-links { display: flex; list-style: none; gap: 2.5rem; }
+.nav-links a { font-size: 0.76rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--ink); position: relative; padding-bottom: 2px; }
+.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--ochre); transition: width 0.3s; }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--white); background: var(--ochre); padding: 0.65rem 1.5rem; transition: background 0.25s, transform 0.2s; }
+.nav-cta:hover { background: var(--forest); transform: translateY(-1px); }
+
+/* HERO */
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 70px; }
+.hero-left { display: flex; flex-direction: column; justify-content: center; padding: 6vw 4vw 6vw 7vw; animation: slideUp 1s cubic-bezier(0.16,1,0.3,1) both; }
+.hero-eyebrow { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; }
+.hero-eyebrow::before { content: ''; display: block; width: 2.5rem; height: 2px; background: var(--ochre); }
+.hero-eyebrow span { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ochre); }
+.hero-headline { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 4.5vw, 5.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+.hero-headline em { font-style: italic; color: var(--ochre); font-weight: 400; }
+.hero-subline { font-size: 1rem; font-weight: 300; color: var(--muted); max-width: 440px; line-height: 1.85; margin-bottom: 2.5rem; border-left: 3px solid var(--gold); padding-left: 1rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.btn-primary { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--white); background: var(--ochre); padding: 0.9rem 2.2rem; border: 2px solid var(--ochre); transition: all 0.25s; display: inline-block; }
+.btn-primary:hover { background: var(--forest); border-color: var(--forest); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,84,26,0.25); }
+.btn-ghost { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--ink); background: transparent; padding: 0.9rem 2.2rem; border: 2px solid var(--ink); transition: all 0.25s; display: inline-block; }
+.btn-ghost:hover { background: var(--ink); color: var(--cream); transform: translateY(-2px); }
+.hero-right { position: relative; overflow: hidden; background: #0d0d08; }
+.hero-right img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+.hero-badge { position: absolute; bottom: 2rem; left: 2rem; background: rgba(26,26,20,0.88); backdrop-filter: blur(8px); padding: 1rem 1.4rem; border-left: 3px solid var(--ochre); }
+.hero-badge-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 0.2rem; }
+.hero-badge-value { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--white); }
+
+/* MARQUEE */
+.marquee-strip { background: var(--ochre); padding: 0.75rem 0; overflow: hidden; white-space: nowrap; display: flex; }
+.marquee-inner { display: inline-flex; animation: marquee 30s linear infinite; }
+.marquee-inner span { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); padding: 0 2rem; }
+.marquee-inner .sep { color: rgba(255,255,255,0.35); }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* STATS */
+.stats { display: grid; grid-template-columns: repeat(4,1fr); background: var(--ink); }
+.stat-item { padding: 2.8rem 2.5rem; border-right: 1px solid rgba(255,255,255,0.07); position: relative; overflow: hidden; transition: background 0.3s; }
+.stat-item:hover { background: rgba(255,255,255,0.04); }
+.stat-item:last-child { border-right: none; }
+.stat-num { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -0.02em; }
+.stat-num span { color: var(--ochre); font-size: 2rem; }
+.stat-label { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 0.5rem; }
+.stat-item::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--ochre); transition: height 0.4s; }
+.stat-item:hover::before { height: 100%; }
+
+/* SECTION BASE */
+.section-tag { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ochre); display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1rem; }
+.section-tag::before { content: ''; display: block; width: 2rem; height: 2px; background: var(--ochre); }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.2rem; }
+.section-title em { font-style: italic; color: var(--ochre); font-weight: 400; }
+.section-body { font-size: 1rem; font-weight: 300; color: var(--muted); max-width: 600px; line-height: 1.85; }
+
+/* PROGRAMS */
+.programs { padding: 7rem 7vw; background: var(--cream); }
+.programs-header { margin-bottom: 4rem; }
+.programs-grid { display: grid; grid-template-columns: repeat(2,1fr); border: 1px solid var(--border); }
+.program-card { padding: 2.8rem 2.5rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; transition: background 0.35s; }
+.program-card:nth-child(2n) { border-right: none; }
+.program-card:nth-child(3), .program-card:nth-child(4) { border-bottom: none; }
+.program-card::before { content: ''; position: absolute; inset: 0; background: var(--forest); transform: scaleY(0); transform-origin: bottom; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); z-index: 0; }
+.program-card:hover::before { transform: scaleY(1); }
+.pc-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+.pc-icon { font-size: 2.2rem; }
+.pc-num { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 900; color: rgba(26,26,20,0.06); line-height: 1; transition: color 0.3s; }
+.program-card:hover .pc-num { color: rgba(255,255,255,0.1); }
+.pc-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--ink); margin-bottom: 0.8rem; line-height: 1.3; position: relative; z-index: 1; transition: color 0.3s; }
+.pc-desc { font-size: 0.9rem; font-weight: 300; color: var(--muted); line-height: 1.8; position: relative; z-index: 1; transition: color 0.3s; }
+.program-card:hover .pc-title, .program-card:hover .pc-desc { color: var(--white); }
+
+/* APPROACH */
+.approach { padding: 7rem 7vw; background: var(--ink); }
+.approach .section-tag { color: var(--gold); }
+.approach .section-tag::before { background: var(--gold); }
+.approach .section-title { color: var(--white); }
+.approach .section-body { color: rgba(255,255,255,0.45); }
+.steps-grid { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.07); }
+.step { padding: 2.5rem 2rem; border-right: 1px solid rgba(255,255,255,0.07); position: relative; }
+.step:last-child { border-right: none; }
+.step-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: rgba(255,255,255,0.05); line-height: 1; margin-bottom: 1.5rem; }
+.step-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.8rem; line-height: 1.3; }
+.step-desc { font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.8; }
+.step::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 3px; background: var(--ochre); transition: width 0.5s; }
+.step:hover::before { width: 100%; }
+
+/* GALLERY */
+.gallery { padding: 7rem 7vw; background: var(--warm); }
+.gallery-header { margin-bottom: 3rem; }
+.photo-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 1rem; }
+.photo-item { overflow: hidden; position: relative; background: var(--ink); }
+.photo-item:first-child { grid-row: 1 / 3; }
+.photo-item img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), filter 0.4s; filter: brightness(0.88); }
+.photo-item:hover img { transform: scale(1.06); filter: brightness(1); }
+.photo-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.2rem 1.2rem 1rem; background: linear-gradient(to top, rgba(26,26,20,0.88) 0%, transparent 100%); transform: translateY(100%); transition: transform 0.35s ease; }
+.photo-item:hover .photo-caption { transform: translateY(0); }
+.photo-caption-tag { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; }
+.photo-caption-title { font-size: 0.85rem; font-weight: 500; color: var(--white); }
+
+/* ABOUT */
+.about { padding: 7rem 7vw; background: var(--cream); }
+.about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+.about-img-side { position: relative; }
+.about-img-main { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center top; display: block; }
+.about-img-badge { position: absolute; bottom: -1.5rem; right: -1.5rem; background: var(--ochre); color: var(--white); padding: 1.5rem 1.8rem; text-align: center; }
+.about-img-badge-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; line-height: 1; }
+.about-img-badge-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; opacity: 0.85; }
+.about-body { font-size: 1rem; font-weight: 300; color: var(--muted); line-height: 1.9; margin-bottom: 1.5rem; }
+.founder-quote { margin: 2rem 0; padding: 1.5rem 2rem; border-left: 4px solid var(--ochre); background: rgba(200,84,26,0.04); }
+.founder-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--ink); line-height: 1.7; margin-bottom: 0.7rem; }
+.founder-quote cite { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ochre); font-style: normal; }
+.about-list { list-style: none; margin: 1.5rem 0 2rem; }
+.about-list li { font-size: 0.9rem; color: var(--muted); padding: 0.5rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 0.8rem; }
+.about-list li::before { content: '▸'; color: var(--ochre); font-size: 0.7rem; margin-top: 0.15rem; flex-shrink: 0; }
+
+/* QUOTE BANNER */
+.quote-banner { padding: 6rem 7vw; background: var(--forest); text-align: center; position: relative; overflow: hidden; }
+.quote-banner::before { content: '"'; position: absolute; font-family: 'Playfair Display', serif; font-size: 20rem; line-height: 1; color: rgba(255,255,255,0.03); top: -2rem; left: 4vw; pointer-events: none; }
+.qb-text { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 2.4rem); font-weight: 400; font-style: italic; color: var(--white); line-height: 1.6; max-width: 900px; margin: 0 auto 1.5rem; position: relative; z-index: 1; }
+.qb-text em { color: var(--gold); font-weight: 700; font-style: normal; }
+.qb-attr { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); position: relative; z-index: 1; }
+.qb-stats { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-top: 3.5rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 1; }
+.qb-stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--white); }
+.qb-stat-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); margin-top: 0.2rem; }
+
+/* CONTACT */
+.contact { padding: 7rem 7vw; background: var(--cream); }
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.contact-info-item { padding: 1.4rem 0; border-bottom: 1px solid var(--border); }
+.contact-info-item:first-child { border-top: 1px solid var(--border); }
+.ci-label { font-size: 0.63rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.3rem; }
+.ci-value { font-size: 0.95rem; color: var(--ink); }
+.ci-value a { color: var(--ink); text-decoration: none; }
+.ci-value a:hover { color: var(--ochre); }
+.ways-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 2rem; }
+.way-item { padding: 1.2rem; border: 1px solid var(--border); transition: border-color 0.25s, background 0.25s; }
+.way-item:hover { border-color: var(--ochre); background: rgba(200,84,26,0.03); }
+.way-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+.way-title { font-size: 0.8rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
+.way-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.6; }
+
+/* FORM */
+.form-wrap { background: var(--ink); padding: 3rem; }
+.form-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 2rem; }
+.form-group { margin-bottom: 1.2rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group label { display: block; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 0.5rem; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.85rem 1rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--white); font-size: 0.9rem; font-family: 'Source Sans 3', sans-serif; outline: none; transition: border-color 0.25s; }
+.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.22); }
+.form-group select { color: rgba(255,255,255,0.7); }
+.form-group select option { background: var(--ink); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--ochre); }
+.form-group textarea { height: 110px; resize: vertical; }
+.form-group.has-error input, .form-group.has-error select { border-color: #e74c3c; }
+.field-error { color: #f4827a; font-size: 0.68rem; margin-top: 0.3rem; display: none; }
+.form-group.has-error .field-error { display: block; }
+.submit-btn { width: 100%; padding: 1rem; background: var(--ochre); border: none; color: var(--white); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; font-family: 'Source Sans 3', sans-serif; transition: background 0.25s, transform 0.2s; margin-top: 0.5rem; }
+.submit-btn:hover { background: var(--moss); transform: translateY(-1px); }
+
+/* FOOTER */
+footer { background: #111108; color: rgba(255,255,255,0.5); padding: 5rem 7vw 2rem; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 4rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.footer-brand { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--white); display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+.footer-brand img { height: 48px; width: 48px; object-fit: contain; border-radius: 50%; filter: brightness(1.1); }
+.footer-brand span { color: var(--ochre); }
+.footer-tagline { font-size: 0.85rem; line-height: 1.8; color: rgba(255,255,255,0.38); }
+.footer-col h4 { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 1.2rem; }
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 0.7rem; }
+.footer-col a { font-size: 0.85rem; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
+.footer-col a:hover { color: var(--ochre); }
+.footer-bottom { padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.74rem; color: rgba(255,255,255,0.22); }
+
+/* ANIMATIONS */
+@keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { height: 60vw; }
+  .stats { grid-template-columns: repeat(2,1fr); }
+  .programs-grid { grid-template-columns: 1fr; }
+  .program-card:nth-child(n) { border-right: none; border-bottom: 1px solid var(--border); }
+  .program-card:last-child { border-bottom: none; }
+  .steps-grid { grid-template-columns: repeat(2,1fr); }
+  .photo-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .photo-item:first-child { grid-row: auto; }
+  .photo-item { height: 240px; }
+  .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .about-img-side { max-width: 480px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .steps-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .photo-grid { grid-template-columns: 1fr; }
+  .photo-item { height: 220px; }
+  .footer-top { grid-template-columns: 1fr; }
+  .qb-stats { gap: 2rem; }
+}
+/* QR CODE */
+.footer-qr {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-qr img {
+  width: 120px;
+  height: 120px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 6px;
+  background: rgba(255,255,255,0.05);
+}
+
+.footer-qr p {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0;
+}
+
+.photo-item1 { height: 240px; }  /* responsive mein */
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <img src="images/logo.png" alt="Mountain Soul Foundation Logo">
+    <div>
+      <div class="nav-logo-text">Mountain <span>Soul</span></div>
+      <div class="nav-logo-sub">Foundation</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#approach">Our Approach</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Get Involved</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Join Us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span>Mountain Soul Foundation — Uttarkashi, Uttarakhand</span></div>
+    <h1 class="hero-headline">Modern Mind,<br><em>Ancient Roots</em></h1>
+    <p class="hero-subline">Education that heals. Culture that empowers. Development that sustains. A registered NGO born during COVID-19, reviving Devbhoomi Uttarakhand through experiential learning, women's empowerment, and cultural preservation.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get Involved →</a>
+      <a href="#approach" class="btn-ghost">Our Approach</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="images/banner.jpg" alt="Mountain Soul Foundation">
+    <div class="hero-badge">
+      <div class="hero-badge-label">Registered NGO</div>
+      <div class="hero-badge-value">October 2021</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Modern Mind</span><span class="sep">✦</span><span>Ancient Roots</span><span class="sep">✦</span><span>Village as Classroom</span><span class="sep">✦</span><span>NEP 2020 Aligned</span><span class="sep">✦</span><span>Garhwal &amp; Kumaon</span><span class="sep">✦</span><span>Kishan Ki Pathsala</span><span class="sep">✦</span><span>Saura Sari SHG</span><span class="sep">✦</span><span>Devbhoomi Uttarakhand</span><span class="sep">✦</span><span>Modern Mind</span><span class="sep">✦</span><span>Ancient Roots</span><span class="sep">✦</span><span>Village as Classroom</span><span class="sep">✦</span><span>NEP 2020 Aligned</span><span class="sep">✦</span><span>Garhwal &amp; Kumaon</span><span class="sep">✦</span><span>Kishan Ki Pathsala</span><span class="sep">✦</span><span>Saura Sari SHG</span><span class="sep">✦</span><span>Devbhoomi Uttarakhand</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-num">5,000<span>+</span></div>
+    <div class="stat-label">Lives Touched</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">15<span>+</span></div>
+    <div class="stat-label">Villages Reached</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">100<span>+</span></div>
+    <div class="stat-label">Trees Planted</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">300<span>L+</span></div>
+    <div class="stat-label">Kadha Distributed</div>
+  </div>
+</div>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="programs-header reveal">
+    <p class="section-tag">What We Do</p>
+    <h2 class="section-title">Our <em>Programs</em> & Initiatives</h2>
+    <p class="section-body">Bridging modern education with ancient wisdom — making villages living classrooms and women the real knowledge holders of Devbhoomi Uttarakhand.</p>
+  </div>
+  <div class="programs-grid reveal">
+    <div class="program-card">
+      <div class="pc-top"><div class="pc-icon">📚</div><div class="pc-num">01</div></div>
+      <div class="pc-title">Modern Mind, Ancient Roots</div>
+      <div class="pc-desc">Our flagship experiential learning program takes school students to villages where they learn Biology, Chemistry, Physics and Social Science through traditional practices — aligned with NEP 2020 and Indian Knowledge Systems (IKS).</div>
+    </div>
+    <div class="program-card">
+      <div class="pc-top"><div class="pc-icon">👩‍🌾</div><div class="pc-num">02</div></div>
+      <div class="pc-title">Women & SHG Empowerment</div>
+      <div class="pc-desc">Village women of Saura Sari SHG are educators and leaders — teaching seed preservation, pickle making, leaf-plate (pattal) manufacturing, and rope making. Their knowledge earns dignity and income.</div>
+    </div>
+    <div class="program-card">
+      <div class="pc-top"><div class="pc-icon">🏅</div><div class="pc-num">03</div></div>
+      <div class="pc-title">Sports & Life Discipline</div>
+      <div class="pc-desc">In partnership with MP Sports College, Dehradun — students experience football grounds, hockey fields, athletic tracks, shooting ranges, and Asia's first ice skating rink to build character, discipline, and resilience.</div>
+    </div>
+    <div class="program-card">
+      <div class="pc-top"><div class="pc-icon">🌿</div><div class="pc-num">04</div></div>
+      <div class="pc-title">Sustainability & Culture</div>
+      <div class="pc-desc">100+ trees planted across 9 villages, Ganga Swachhata Abhiyan, Giloy Kadha distribution during COVID, and campaigns preserving Uttarakhand's festivals, food traditions, and indigenous knowledge systems.</div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="reveal">
+    <p class="section-tag">How We Work</p>
+    <h2 class="section-title">The Village as a <em>Living School</em></h2>
+    <p class="section-body">Learning by doing — an ancient and global philosophy. Every village is a unique education centre with teachers who have never been given a classroom.</p>
+  </div>
+  <div class="steps-grid reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Village as Classroom</div>
+      <div class="step-desc">Students are taken to real villages where farmers, women SHGs and elders become the teachers — reversing the traditional knowledge hierarchy.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Kishan Ki Pathsala</div>
+      <div class="step-desc">Farmers teach full crop cycles, traditional irrigation (Gharat, Panchakki), soil health, natural fertilizers and weather reading — ancient science made alive.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Culture Through Living</div>
+      <div class="step-desc">Students taste Jhangora and Mandua, wear traditional dress, witness rope-making and pattal crafts — culture is not taught as nostalgia, it is lived.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">The Gift of Dignity</div>
+      <div class="step-desc">Each student receives a Gift Pack made by SHG women — pickles, handicrafts and leaf plates — creating market linkage between village producers and urban consumers.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-header reveal">
+    <p class="section-tag">Modern Mind, Ancient Roots — In the Field</p>
+    <h2 class="section-title">Our Work in <em>Action</em></h2>
+  </div>
+  <div class="photo-grid reveal">
+    <div class="photo-item">
+      <img src="images/nature-walk.jpg" alt="Nature Walk — Environmental Education" loading="lazy">
+      <div class="photo-caption">
+        <div class="photo-caption-tag">Environmental Education</div>
+        <div class="photo-caption-title">Nature Walk — Mountain Learning</div>
+      </div>
+    </div>
+    <div class="photo-item">
+      <img src="images/nature-walk1.jpeg" alt="Nature Walk — Environmental Education" loading="lazy">
+      <div class="photo-caption">
+        <div class="photo-caption-tag">Environmental Education</div>
+        <div class="photo-caption-title">Nature Walk — Mountain Learning</div>
+      </div>
+    </div>
+    <div class="photo-item">
+      <img src="images/field-trip.jpg" alt="Field Trip Dehradun 2026" loading="lazy">
+      <div class="photo-caption">
+        <div class="photo-caption-tag">Community Outreach</div>
+        <div class="photo-caption-title">Field Trip — Dehradun 2026</div>
+      </div>
+    </div>
+    <div class="photo-item">
+      <img src="images/field-trip1.jpeg" alt="Field Trip Dehradun 2026" loading="lazy">
+      <div class="photo-caption">
+        <div class="photo-caption-tag">Community Outreach</div>
+        <div class="photo-caption-title">Field Trip — Dehradun 2026</div>
+      </div>
+    </div>
+    <div class="photo-item">
+      <img src="images/football-tournament.jpg" alt="Football Tournament 2026" loading="lazy">
+      <div class="photo-caption">
+        <div class="photo-caption-tag">Sports & Fitness</div>
+        <div class="photo-caption-title">56th Memorial Football Tournament</div>
+      </div>
+    </div>
+    <div class="photo-item">
+      <img src="images/immunity-booster1.jpeg" alt="COVID Time - Immunity Booster Kada" loading="lazy">
+      <div class="photo-caption">
+        <div class="photo-caption-tag">Foundation Story</div>
+        <div class="photo-caption-title">COVID Relief - Immunity Booster Kada</div>
+      </div>
+    </div>
+    <!-- <div class="photo-item">
+      <img src="images/mask-distribution.jpeg" alt="COVID Relief - Mask Distribution" 
+           loading="lazy" style="object-position: center top;">
+      <div class="photo-caption">
+        <div class="photo-caption-tag">COVID Relief</div>
+        <div class="photo-caption-title">Mask & Materials Distribution</div>
+      </div>
+    </div> -->
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-img-side reveal">
+      <img src="images/immunity-booster.jpeg" alt="Mountain Soul Foundation in action" class="about-img-main">
+      <div class="about-img-badge">
+        <div class="about-img-badge-num">2021</div>
+        <div class="about-img-badge-label">Registered NGO</div>
+      </div>
+    </div>
+    <div class="about-content reveal">
+      <p class="section-tag">About Us</p>
+      <h2 class="section-title">Born in the <em>Toughest Time</em></h2>
+      <p class="about-body">Mountain Soul Foundation was born during COVID-19 in 2021. Manoj Prakash Jaguri, a native of Uttarkashi, inspired by his mother's resilience and the mountains' ancient wisdom, began distributing Giloy Kadha village to village. That act of care became a movement — and a registered NGO by October 2021.</p>
+      <div class="founder-quote">
+        <blockquote>"The soul of the mountains can only be protected by empowering the people who live there."</blockquote>
+        <cite>— Manoj Prakash Jaguri, Founder & President</cite>
+      </div>
+      <ul class="about-list">
+        <li>Founded 2021 — born during COVID-19, registered NGO October 2021</li>
+        <li>Active across Garhwal &amp; Kumaon regions of Uttarakhand</li>
+        <li>Aligned with NEP 2020 and Indian Knowledge Systems (IKS)</li>
+        <li>Partner: MP Sports College Dehradun, Bright Public Junior High School</li>
+        <li>Programs: Education · Women Empowerment · Sports · Sustainability · Culture</li>
+      </ul>
+      <a href="#contact" class="btn-primary">Partner With Us →</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BANNER -->
+<section class="quote-banner">
+  <p class="qb-text">"Mountain Soul Foundation is not an organization that started with resources.<br>It started with <em>responsibility.</em>"</p>
+  <p class="qb-attr">— Manoj Prakash Jaguri, Founder & President</p>
+  <div class="qb-stats">
+    <div><div class="qb-stat-num">Garhwal &amp; Kumaon</div><div class="qb-stat-label">Regions Active</div></div>
+    <div><div class="qb-stat-num">Oct 2021</div><div class="qb-stat-label">Registered NGO</div></div>
+    <div><div class="qb-stat-num">NEP 2020</div><div class="qb-stat-label">Aligned Programs</div></div>
+    <div><div class="qb-stat-num">5,000+</div><div class="qb-stat-label">Lives Touched</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="reveal">
+        <p class="section-tag">Get Involved</p>
+        <h2 class="section-title">Join the <em>Mountain Soul</em> Movement</h2>
+        <p class="section-body">Partner with us to bring experiential learning to schools, support SHG women, and help preserve the living culture of Uttarakhand.</p>
+      </div>
+      <div class="reveal" style="margin-top:2.5rem;">
+        <div class="contact-info-item"><div class="ci-label">Phone</div><div class="ci-value"><a href="tel:8533075292">📞 8533075292</a></div></div>
+        <div class="contact-info-item"><div class="ci-label">Email</div><div class="ci-value"><a href="mailto:mountainsouluk@gmail.com">mountainsouluk@gmail.com</a></div></div>
+        <div class="contact-info-item"><div class="ci-label">Location</div><div class="ci-value">Uttarkashi, Uttarakhand, India</div></div>
+        <div class="contact-info-item"><div class="ci-label">Instagram</div><div class="ci-value"><a href="https://instagram.com/mountainsouluk" target="_blank">@mountainsouluk</a></div></div>
+        <div class="contact-info-item"><div class="ci-label">Hours</div><div class="ci-value">Mon – Sat, 9 am – 6 pm</div></div>
+      </div>
+      <div class="ways-grid reveal">
+        <div class="way-item"><div class="way-icon">🏫</div><div class="way-title">School Partnership</div><div class="way-desc">Bring Modern Mind, Ancient Roots to your school</div></div>
+        <div class="way-item"><div class="way-icon">🤝</div><div class="way-title">CSR Partnership</div><div class="way-desc">Align your CSR with our registered programs</div></div>
+        <div class="way-item"><div class="way-icon">🙋</div><div class="way-title">Volunteer</div><div class="way-desc">Join our on-ground team across Uttarakhand</div></div>
+        <div class="way-item"><div class="way-icon">💛</div><div class="way-title">Donate</div><div class="way-desc">Fund village programs and SHG training</div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="form-wrap">
+        <div class="form-title">Send Us a Message</div>
+        <form onsubmit="handleSubmit(event)">
+          <input type="hidden" name="access_key" value="58b69fbd-7d3f-436b-9209-6f5d5e11d6fb">
+          <input type="hidden" name="subject" value="New Enquiry — Mountain Soul Foundation">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" name="name" placeholder="Full name" required>
+            </div>
+            <div class="form-group">
+              <label>How Can You Help?</label>
+              <select name="enquiry_type">
+                <option>School Partnership</option>
+                <option>Volunteer</option>
+                <option>Donor / Sponsor</option>
+                <option>CSR Partnership</option>
+                <option>Media / Press</option>
+                <option>General Enquiry</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" placeholder="10-digit mobile" pattern="[0-9]{10}" maxlength="10" required oninput="validatePhone(this)">
+              <span class="field-error" id="phone-error">Enter a valid 10-digit number.</span>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" name="email" placeholder="your@email.com" required oninput="validateEmail(this)">
+              <span class="field-error" id="email-error">Enter a valid email address.</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Location / School / Organisation</label>
+            <input type="text" name="location" placeholder="Your city, school or organisation name">
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea name="message" placeholder="Tell us how you would like to partner with Mountain Soul Foundation..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand"><img src="images/logo.png" alt="Logo">Mountain <span>Soul</span> Foundation</div>
+      <p class="footer-tagline">Born during COVID-19 in 2021. Rooted in Uttarkashi, serving communities across Uttarakhand with Modern Mind, Ancient Roots.</p>
+       <!-- QR Code yahan add karo -->
+      <div class="footer-qr">
+        <img src="images/QR.png" alt="Donate QR Code">
+        <p>Donate</p>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="#">Modern Mind, Ancient Roots</a></li>
+        <li><a href="#">Kishan Ki Pathsala</a></li>
+        <li><a href="#">Women & SHG Empowerment</a></li>
+        <li><a href="#">Sports & Life Discipline</a></li>
+        <li><a href="#">Cultural Preservation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Organisation</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#approach">Our Approach</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:mountainsouluk@gmail.com">mountainsouluk@gmail.com</a></li>
+        <li><a href="tel:8533075292">📞 8533075292</a></li>
+        <li>Uttarkashi, Uttarakhand</li>
+        <li>Mon–Sat 9am–6pm</li>
+        <li><a href="https://instagram.com/mountainsouluk" target="_blank">@mountainsouluk</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Mountain Soul Foundation, Uttarkashi, Uttarakhand. Registered NGO 2021.</span>
+    <span>Privacy Policy · Terms of Service</span>
+  </div>
+</footer>
+
+<script>
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+function checkReveals() {
+  reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('visible'); });
+}
+window.addEventListener('scroll', checkReveals);
+window.addEventListener('resize', checkReveals);
+setTimeout(checkReveals, 100);
+setTimeout(checkReveals, 500);
+
+// Nav scroll
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+// Validation
+function validatePhone(input) {
+  const g = input.closest('.form-group'), err = document.getElementById('phone-error');
+  const v = input.value.replace(/\D/g,''); input.value = v;
+  if (v.length > 0 && v.length !== 10) { g.classList.add('has-error'); if(err) err.style.display='block'; }
+  else { g.classList.remove('has-error'); if(err) err.style.display='none'; }
+}
+function validateEmail(input) {
+  const g = input.closest('.form-group'), err = document.getElementById('email-error');
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
+  if (input.value.length > 0 && !ok) { g.classList.add('has-error'); if(err) err.style.display='block'; }
+  else { g.classList.remove('has-error'); if(err) err.style.display='none'; }
+}
+function validateForm(form) {
+  let valid = true;
+  const phone = form.querySelector('[name="phone"]'), email = form.querySelector('[name="email"]'), name = form.querySelector('[name="name"]');
+  if (name && !name.value.trim()) { name.closest('.form-group').classList.add('has-error'); valid = false; }
+  if (phone) { const d = phone.value.replace(/\D/g,''); if(d.length!==10){ phone.closest('.form-group').classList.add('has-error'); const e=document.getElementById('phone-error'); if(e)e.style.display='block'; valid=false; } }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { email.closest('.form-group').classList.add('has-error'); const e=document.getElementById('email-error'); if(e)e.style.display='block'; valid=false; }
+  return valid;
+}
+async function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.submit-btn'), form = e.target;
+  if (!validateForm(form)) return;
+  btn.textContent = 'Sending…'; btn.disabled = true; btn.style.opacity = '0.7';
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
+    const data = await res.json();
+    if (data.success) { btn.textContent='✓ Message Sent!'; btn.style.background='#2d7a3a'; btn.style.opacity='1'; form.reset(); setTimeout(()=>{ btn.textContent='Send Message →'; btn.style.background=''; btn.disabled=false; }, 4000); }
+    else throw new Error();
+  } catch { btn.textContent='Error — Try Again'; btn.style.background='#c0392b'; btn.style.opacity='1'; btn.disabled=false; setTimeout(()=>{ btn.textContent='Send Message →'; btn.style.background=''; }, 4000); }
+}
+</script>
+</body>
+</html>
