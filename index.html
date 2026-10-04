@@ -59,6 +59,13 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(26,26,20,0.08); }
 .btn-ghost:hover { background: var(--ink); color: var(--cream); transform: translateY(-2px); }
 .hero-right { position: relative; overflow: hidden; background: #0d0d08; }
 .hero-right img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+.hero-slides { position: absolute; inset: 0; }
+.hero-slides img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease; }
+.hero-slides img.active { opacity: 1; }
+.hero-slide-caption { position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(26,26,20,0.75); backdrop-filter: blur(6px); padding: 0.5rem 0.9rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); transition: opacity 0.4s; }
+.hero-dots { position: absolute; bottom: 2.4rem; right: 2rem; display: flex; gap: 0.5rem; }
+.hero-dots button { width: 9px; height: 9px; border-radius: 50%; border: none; padding: 0; background: rgba(255,255,255,0.4); cursor: pointer; transition: background 0.3s, transform 0.3s; }
+.hero-dots button.active { background: var(--ochre); transform: scale(1.3); }
 .hero-badge { position: absolute; bottom: 2rem; left: 2rem; background: rgba(26,26,20,0.88); backdrop-filter: blur(8px); padding: 1rem 1.4rem; border-left: 3px solid var(--ochre); }
 .hero-badge-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 0.2rem; }
 .hero-badge-value { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--white); }
@@ -296,7 +303,9 @@ footer { background: #111108; color: rgba(255,255,255,0.5); padding: 5rem 7vw 2r
     </div>
   </div>
   <div class="hero-right">
-    <img id="hero-banner" src="" alt="">
+    <div class="hero-slides" id="hero-slides"></div>
+    <div class="hero-slide-caption" id="hero-slide-caption"></div>
+    <div class="hero-dots" id="hero-dots"></div>
     <div class="hero-badge">
       <div class="hero-badge-label" id="hero-badge-label"></div>
       <div class="hero-badge-value" id="hero-badge-value"></div>
@@ -739,8 +748,29 @@ function loadAndPopulate() {
   bp.textContent = h.btn_primary_text; bp.href = h.btn_primary_href;
   const bg = document.getElementById('hero-btn-ghost');
   bg.textContent = h.btn_ghost_text; bg.href = h.btn_ghost_href;
-  const banner = document.getElementById('hero-banner');
-  banner.src = h.banner_img; banner.alt = h.banner_img_alt;
+  // Hero slideshow — uses the "Our Work in Action" gallery photos
+  const slides = d.gallery.photos.length ? d.gallery.photos : [{ src: h.banner_img, alt: h.banner_img_alt, title: '' }];
+  const slidesEl = document.getElementById('hero-slides');
+  const dotsEl = document.getElementById('hero-dots');
+  const capEl = document.getElementById('hero-slide-caption');
+  slidesEl.innerHTML = slides.map((p, i) =>
+    `<img src="${p.src}" alt="${p.alt}" class="${i === 0 ? 'active' : ''}"${i === 0 ? '' : ' loading="lazy"'}>`
+  ).join('');
+  dotsEl.innerHTML = slides.length > 1 ? slides.map((_, i) =>
+    `<button class="${i === 0 ? 'active' : ''}" aria-label="Slide ${i + 1}"></button>`
+  ).join('') : '';
+  const imgs = slidesEl.querySelectorAll('img'), dots = dotsEl.querySelectorAll('button');
+  let cur = 0, timer;
+  const show = n => {
+    imgs[cur].classList.remove('active'); dots[cur]?.classList.remove('active');
+    cur = (n + imgs.length) % imgs.length;
+    imgs[cur].classList.add('active'); dots[cur]?.classList.add('active');
+    capEl.textContent = slides[cur].title || '';
+    capEl.style.opacity = slides[cur].title ? 1 : 0;
+  };
+  const start = () => { clearInterval(timer); if (imgs.length > 1) timer = setInterval(() => show(cur + 1), 4000); };
+  dots.forEach((b, i) => b.addEventListener('click', () => { show(i); start(); }));
+  show(0); start();
   document.getElementById('hero-badge-label').textContent = h.badge_label;
   document.getElementById('hero-badge-value').textContent = h.badge_value;
 
